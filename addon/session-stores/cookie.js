@@ -135,22 +135,22 @@ export default BaseStore.extend({
 
   _cookies: service('cookies'),
 
-  _secureCookies: computed(function() {
+  get _secureCookies() {
     if (this.get('_fastboot.isFastBoot')) {
       return this.get('_fastboot.request.protocol') === 'https';
     }
 
     return window.location.protocol === 'https:';
-  }).volatile(),
+  },
 
-  _isPageVisible: computed(function() {
+  get _isPageVisible() {
     if (this.get('_fastboot.isFastBoot')) {
       return false;
     } else {
       const visibilityState = typeof document !== 'undefined' ? document.visibilityState || 'visible' : false;
       return visibilityState === 'visible';
     }
-  }).volatile(),
+  },
 
   init() {
     this._super(...arguments);
